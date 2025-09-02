@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedo Clicker 9000</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="CSS/styles.css">
+    <script src="JS/main.js"></script>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Poppins");
+    </style>
+</head>
+<body class="three-grid">
+    <div class="section-1">
+        <h1 onclick="changeName()"><strong class="underline">Your Name</strong> Sting Operation</h1>
+        <h3>Stings: <span>0</span></h3>
+        <h4>SPS: <span>0</span></h4>
+        <img id="pedos" src="images/Pedos/MichaelMaydew.webp" alt="Pedophile" onclick="countimg()">
+        <p class="info">All of these pedophile's are either well know or have been convicted. See more at <a class="underline" href="https://pedoclicker.com/pedoinfo">https://pedoclicker.io/pedoinfo</a>.</p>
+    </div>
+    <div class="section-2">
+        <h1>Stats</h1>
+        <div class="stats">
+            <div class="stats-item">
+                <div class="stats-name">Total Clicks : <span class="stats-value">0</span></div>
+            </div>
+            <div class="stats-item">
+                <div class="stats-name">Total Stings : <span class="stats-value">0</span></div>
+            </div>
+            <div class="stats-item">
+                <div class="stats-name">Total Upgrade SPS : <span class="stats-value">0</span></div>
+            </div>
+            <div class="stats-item">
+                <div class="stats-name">Total Playtime : <span class="stats-value">0s</span></div>
+            </div>
+        </div>
+        <h1>Achievements <span id="achievements">0/0</span></h1>
+        <div class="achievement-list">
+            <div class="achievement-item" data-achievement="first_click">
+                <img src="images/AchIcons/ClickAch.webp" alt="First Click">
+                <div class="achievement-description">Make your first click!</div>
+            </div>
+            <div class="achievement-item" data-achievement="clicks100">
+                <img src="images/AchIcons/ClickAch2.webp" alt="100 Clicks">
+                <div class="achievement-description">Get 100 clicks!</div>
+            </div>
+            <div class="achievement-item" data-achievement="clicks1000">
+                <img src="images/AchIcons/ClickAch3.webp" alt="1000 Clicks">
+                <div class="achievement-description">Get 1000 clicks!</div>
+            </div>
+            <div class="achievement-item" data-achievement="clicks10k">
+                <img src="images/AchIcons/ClickAch4.webp" alt="10,000 Clicks">
+                <div class="achievement-description">Get 10,000 clicks!</div>
+            </div>
+            <div class="achievement-item" data-achievement="clicks100k">
+                <img src="images/AchIcons/ClickAch5.webp" alt="100k Clicks">
+                <div class="achievement-description">Get 100,000 clicks!</div>
+            </div>
+            <div class="achievement-item" data-achievement="sting_operation">
+                <img src="images/AchIcons/StingAch.webp" alt="Sting Operation">
+                <div class="achievement-description">Reach 100 stings!</div>
+            </div>
+            <div class="achievement-item" data-achievement="sting_operation1k">
+                <img src="images/AchIcons/StingAch2.webp" alt="Sting Operation 1k">
+                <div class="achievement-description">Reach 1,000 stings!</div>
+            </div>
+            <div class="achievement-item" data-achievement="sting_operation10k">
+                <img src="images/AchIcons/StingAch3.webp" alt="Sting Operation 10k">
+                <div class="achievement-description">Reach 10,000 stings!</div>
+            </div>
+            <div class="achievement-item" data-achievement="sting_operation100k">
+                <img src="images/AchIcons/StingAch4.webp" alt="Sting Operation 100k">
+                <div class="achievement-description">Reach 100,000 stings!</div>
+            </div>
+            <div class="achievement-item" data-achievement="sting_operation1M">
+                <img src="images/AchIcons/StingAch5.webp" alt="Sting Operation 1M">
+                <div class="achievement-description">Reach 1 Million stings!</div>
+            </div>
+            <div class="achievement-item" data-achievement="get_jim">
+                <img src="images/AchIcons/JimAch.webp" alt="Get Jimmy's Glasses">
+                <div class="achievement-description">Get 1 pair of Jimmy's glasses!</div>
+            </div>
+            <div class="achievement-item" data-achievement="get_jim100">
+                <img src="images/AchIcons/JimAch2.webp" alt="Get 100 Jimmy's Glasses">
+                <div class="achievement-description">Get 100 pairs of Jimmy's glasses!</div>
+            </div>
+            <div class="achievement-item" data-achievement="get_hs">
+                <img src="images/AchIcons/HSAch.webp" alt="Get HS TikTok Live">
+                <div class="achievement-description">Get 1 HS TikTok Live!</div>
+            </div>
+            <div class="achievement-item" data-achievement="get_hs100">
+                <img src="images/AchIcons/HSAch2.webp" alt="Get 100 HS TikTok Lives">
+                <div class="achievement-description">Get 100 HS TikTok Lives!</div>
+            </div>
+            <div class="achievement-item" data-achievement="get_drdisrespect">
+                <img src="images/AchIcons/DrDisrespectAch.webp" alt="Get Dr. Disrespect">
+                <div class="achievement-description">Get 1 Dr. Disrespect Twitch Stream!</div>
+            </div>
+            <div class="achievement-item" data-achievement="get_drdisrespect100">
+                <img src="images/AchIcons/DrDisrespectAch2.webp" alt="Get 100 Dr. Disrespect Twitch Streams">
+                <div class="achievement-description">Get 100 Dr. Disrespect Twitch Streams!</div>
+            </div>
+            <div class="achievement-item" data-achievement="get_edpwatch">
+                <img src="images/AchIcons/EDPWatchAch.webp" alt="Get EDPWatch.com">
+                <div class="achievement-description">Get 1 EDPWatch.com Membership!</div>
+            </div>
+            <div class="achievement-item" data-achievement="get_edpwatch100">
+                <img src="images/AchIcons/EDPWatchAch2.webp" alt="Get 100 EDPWatch.com Memberships">
+                <div class="achievement-description">Get 100 EDPWatch.com Memberships!</div>
+            </div>
+            <div class="achievement-item" data-achievement="get_informants">
+                <img src="images/AchIcons/InformantsAch.webp" alt="Get Informants">
+                <div class="achievement-description">Get 1 Police Informant!</div>
+            </div>
+            <div class="achievement-item" data-achievement="get_informants100">
+                <img src="images/AchIcons/InformantsAch2.webp" alt="Get 100 Informants">
+                <div class="achievement-description">Get 100 Police Informants!</div>
+            </div>
+            <div class="achievement-item" data-achievement="get_mom">
+                <img src="images/AchIcons/MomAch.webp" alt="Get Mom">
+                <div class="achievement-description">Get 1 Mom involved!</div>
+            </div>
+            <div class="achievement-item" data-achievement="get_mom100">
+                <img src="images/AchIcons/MomAch2.webp" alt="Get 100 Moms">
+                <div class="achievement-description">Get 100 Moms involved!</div>
+            </div>
+            <div class="achievement-item" data-achievement="get_beenhacked">
+                <img src="images/AchIcons/HackedAch.webp" alt="I've Been Hacked!">
+                <div class="achievement-description">Get 1 "I've Been Hacked!"!</div>
+            </div>
+            <div class="achievement-item" data-achievement="get_beenhacked100">
+                <img src="images/AchIcons/HackedAch2.webp" alt="Get 100 'I've Been Hacked!'">
+                <div class="achievement-description">Get 100 "I've Been Hacked!"!</div>
+            </div>
+        </div>
+
+    </div>
+    <div class="section-3">
+        <h1>Upgrades</h1>
+        <div class="upgrade-item" onclick="buyUpgrade('jimmyglass')">
+            <div class="upgrade-info">
+                <div class="upgrade-name">Jimmy's Glasses</div>
+                <div class="upgrade-description">Improves your eyesight 👀. +1 SPS.</div>
+            </div>
+            <div class="upgrade-cost">50 stings</div>
+        </div>
+
+        <div class="upgrade-item" onclick="buyUpgrade('hslives')">
+            <div class="upgrade-info">
+                <div class="upgrade-name">HS TikTok Lives</div>
+                <div class="upgrade-description">"Is He Leng?" - HS. +3 SPS.</div>
+            </div>
+            <div class="upgrade-cost">100 stings</div>
+        </div>
+
+        <div class="upgrade-item" onclick="buyUpgrade('drdisrespect')">
+            <div class="upgrade-info">
+                <div class="upgrade-name">Dr. Disrespect Twitch Streams</div>
+                <div class="upgrade-description">"I'm No Predator 🤡" - Dr. Disrespect. +5 SPS.</div>
+            </div>
+            <div class="upgrade-cost">250 stings</div>
+        </div>
+
+        <div class="upgrade-item" onclick="buyUpgrade('EDPWatch')">
+            <div class="upgrade-info">
+                <div class="upgrade-name">EDPWatch.com Memberships</div>
+                <div class="upgrade-description">HEAD ON OVER TO EDPWATCH.COM 💥💥💥💥. +10 SPS</div>
+            </div>
+            <div class="upgrade-cost">500 stings</div>
+        </div>
+
+        <div class="upgrade-item" onclick="buyUpgrade('informants')">
+            <div class="upgrade-info">
+                <div class="upgrade-name">Police Informants</div>
+                <div class="upgrade-description">Hire people to gather intel on potential targets 👮🏻. +35 SPS.</div>
+            </div>
+            <div class="upgrade-cost">1000 stings</div>
+        </div>
+
+        <div class="upgrade-item" onclick="buyUpgrade('getmom')">
+            <div class="upgrade-info">
+                <div class="upgrade-name">Get Mom</div>
+                <div class="upgrade-description">"Carl who's this child?" "MooOOmmmM" 😨. +75 SPS.</div>
+            </div>
+            <div class="upgrade-cost">5000 stings</div>
+        </div>
+
+        <div class="upgrade-item" onclick="buyUpgrade('beenhacked')">
+            <div class="upgrade-info">
+                <div class="upgrade-name">I've Been Hacked!</div>
+                <div class="upgrade-description">"I've Been Hacked!" 🫨. +150 SPS.</div>
+            </div>
+            <div class="upgrade-cost">15000 stings</div>
+        </div>
+    </div>
+</body>
+</html>
