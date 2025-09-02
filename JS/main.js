@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let totalStings = 0;
     let upgradesps = 0;
     let totalPlaytime = 0;
-    
+
     // Timer variables
     let startTime = Date.now();
     let timerInterval = null;
@@ -230,6 +230,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // track click timestamps (ms)
     const clickTimes = [];
 
+    // Anti-autoclick: minimum delay between accepted clicks (ms)
+    const clickCooldown = 90; // adjust as needed
+    let lastClickTime = 0;
+
     // Cached DOM elements
     const stingsSpan = document.querySelector(".section-1 h3 span");
     const spsSpan = document.querySelector(".section-1 h4 span");
@@ -290,7 +294,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const hours = Math.floor((totalSeconds % 86400) / 3600);
         const minutes = Math.floor((totalSeconds % 3600) / 60);
         const seconds = Math.floor(totalSeconds % 60);
-        
+
         let result = "";
         if (days > 0) result += days + "d ";
         if (hours > 0 || days > 0) result += hours + "h ";
@@ -303,15 +307,15 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateTimer() {
         const currentTime = Date.now();
         const elapsedTimeInSeconds = Math.floor((currentTime - startTime) / 1000);
-        
+
         // Update totalPlaytime for statistics
         totalPlaytime = elapsedTimeInSeconds;
-        
+
         // Update the timer displays
         if (timerDisplay) {
             timerDisplay.textContent = formatTime(totalPlaytime);
         }
-        
+
         // Update the stats value for playtime without triggering a full UI update
         if (statsvalue && statsvalue[3]) {
             statsvalue[3].textContent = formatTime(totalPlaytime);
@@ -504,7 +508,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!nameStrong) return;
         const newName = prompt("Enter your name:");
         if (newName) {
+            operationName = newName;
             nameStrong.textContent = newName;
+            saveGame(); // optional immediate save
         }
     };
 
@@ -522,14 +528,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     window.countimg = function () {
+        const now = Date.now();
+
+        // throttle too-fast clicks
+        if (now - lastClickTime < clickCooldown) {
+            // Small visual feedback for throttled clicks
+            if (clickImg) {
+                clickImg.style.transform = "scale(0.98)";
+                setTimeout(() => {
+                    clickImg.style.transform = "";
+                }, 80);
+            }
+            return;
+        }
+        lastClickTime = now;
+
         // Play click sound
         playSound(clickSound);
-        
+
         stings++;
         totalClicks++;
         totalStings++;
-        // record this click time
-        const now = Date.now();
         clickTimes.push(now);
 
         // remove timestamps older than 1 second
@@ -553,7 +572,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (stings >= jimmyglassupgrades) {
                     // Play upgrade sound
                     playSound(upgradeSound);
-                    
+
                     stings -= jimmyglassupgrades;
                     jimmyglassupgrades = Math.floor(jimmyglassupgrades * 1.1);
                     upgradesps += 1;
@@ -569,7 +588,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (stings >= hslivesupgrades) {
                     // Play upgrade sound
                     playSound(upgradeSound);
-                    
+
                     stings -= hslivesupgrades;
                     hslivesupgrades = Math.floor(hslivesupgrades * 1.2);
                     upgradesps += 3;
@@ -585,7 +604,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (stings >= drdisrespectupgrades) {
                     // Play upgrade sound
                     playSound(upgradeSound);
-                    
+
                     stings -= drdisrespectupgrades;
                     drdisrespectupgrades = Math.floor(drdisrespectupgrades * 1.2);
                     upgradesps += 5;
@@ -601,7 +620,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (stings >= edpwatchupgrades) {
                     // Play upgrade sound
                     playSound(upgradeSound);
-                    
+
                     stings -= edpwatchupgrades;
                     edpwatchupgrades = Math.floor(edpwatchupgrades * 1.2);
                     upgradesps += 10;
@@ -617,10 +636,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (stings >= informantsupgrades) {
                     // Play upgrade sound
                     playSound(upgradeSound);
-                    
+
                     stings -= informantsupgrades;
                     informantsupgrades = Math.floor(informantsupgrades * 1.2);
-                    upgradesps += 35;
+                    upgradesps += 25;
                     if (!upgrades.informants) upgrades.informants = 0;
                     upgrades.informants++;
                     upgrades.totalSpent += informantsupgrades;
@@ -633,10 +652,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (stings >= getmomupgrades) {
                     // Play upgrade sound
                     playSound(upgradeSound);
-                    
+
                     stings -= getmomupgrades;
                     getmomupgrades = Math.floor(getmomupgrades * 1.2);
-                    upgradesps += 75;
+                    upgradesps += 50;
                     if (!upgrades.getmom) upgrades.getmom = 0;
                     upgrades.getmom++;
                     upgrades.totalSpent += getmomupgrades;
@@ -649,10 +668,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (stings >= beenhackedupgrades) {
                     // Play upgrade sound
                     playSound(upgradeSound);
-                    
+
                     stings -= beenhackedupgrades;
                     beenhackedupgrades = Math.floor(beenhackedupgrades * 1.2);
-                    upgradesps += 150;
+                    upgradesps += 100;
                     if (!upgrades.beenhacked) upgrades.beenhacked = 0;
                     upgrades.beenhacked++;
                     upgrades.totalSpent += beenhackedupgrades;
@@ -669,7 +688,7 @@ document.addEventListener("DOMContentLoaded", function () {
         clearInterval(timerInterval);
     }
     timerInterval = setInterval(updateTimer, 1000);
-    
+
     // Call once immediately to initialize
     updateTimer();
 
@@ -714,11 +733,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Save / Load support
-    const SAVE_KEY = "pedoclicker9000_save_v1";
+    const SAVE_KEY = "pedoclicker_savefile_v1.0.1";
 
     function saveGame() {
         try {
             const save = {
+                operationName,
                 stings,
                 sps,
                 totalClicks,
@@ -754,6 +774,10 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!raw) return;
             const data = JSON.parse(raw);
 
+            if (typeof data.operationName === 'string') {
+                operationName = data.operationName;
+                if (nameStrong) nameStrong.textContent = operationName;
+            }
             if (typeof data.stings === 'number') stings = data.stings;
             if (typeof data.sps === 'number') sps = data.sps;
             if (typeof data.totalClicks === 'number') totalClicks = data.totalClicks;
