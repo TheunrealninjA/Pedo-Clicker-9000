@@ -1,0 +1,1 @@
+This game was created to spread awearness about convicted pedofiles while also having a fun twist to it!
